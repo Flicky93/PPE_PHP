@@ -51,16 +51,52 @@ class PdoGsb{
  
  * @param $login 
  * @param $mdp
- * @return l'id, le nom et le prénom sous la forme d'un tableau associatif 
+ * @return l'id, le nom et le prénom et le token d'un visiteur sous la forme d'un tableau associatif 
 */
-	public function getInfosVisiteur($login, $mdp){
-		$req = "select visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom from visiteur 
+	public function getInfosVisiteur($login, $mdp, $token){
+		$req = "select visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom, visiteur.token as token from visiteur  
 		where visiteur.login='$login' and visiteur.mdp='$mdp'";
+		try {
 		$rs = PdoGsb::$monPdo->query($req);
+		}
+		catch (PDOException $e)
+		{
+		echo $e->getMessage();	
+		}
 		$ligne = $rs->fetch();
 		return $ligne;
 	}
 
+	/* Retourne la liste de tous les visiteurs
+
+	* @ return le nom et le prenom des visiteurs sous la forme d'un tableau associatif
+	*/
+
+	public function getListeVisiteurs(){
+		$req = "select visiteur.nom as nom, visiteur.prenom as prenom, visiteur.token as token, visiteur.id as id from visiteur";
+		try {
+		$rs = PdoGsb::$monPdo->query($req);
+		}
+		catch (PDOException $e)
+		{
+		echo $e->getMessage();	
+		}
+		$ligne = $rs->fetchAll();
+		return $ligne;
+	}
+
+	public function getInfoNeed($id) {
+		$req = "select visiteur.nom as nom, visiteur.prenom as prenom from visiteur where visiteur.id='$id' ";
+		try {
+		$rs = PdoGsb::$monPdo->query($req);
+	}
+		catch (PDOException $e)
+		{
+			echo $e->getMessage();
+		}
+		$ligne = $rs->fetchAll();
+		return $ligne;
+	}
 /**
  * Retourne sous forme d'un tableau associatif toutes les lignes de frais hors forfait
  * concernées par les deux arguments
@@ -106,7 +142,7 @@ class PdoGsb{
  * @return l'id, le libelle et la quantité sous la forme d'un tableau associatif 
 */
 	public function getLesFraisForfait($idVisiteur, $mois){
-		$req = "select fraisforfait.id as idfrais, fraisforfait.libelle as libelle, 
+		$req = "select fraisforfait.id as idfrais, fraisforfait.libelle as libelle, fraisforfait.montant as montant, 
 		lignefraisforfait.quantite as quantite from lignefraisforfait inner join fraisforfait 
 		on fraisforfait.id = lignefraisforfait.idfraisforfait
 		where lignefraisforfait.idvisiteur ='$idVisiteur' and lignefraisforfait.mois='$mois' 
@@ -115,6 +151,7 @@ class PdoGsb{
 		$lesLignes = $res->fetchAll();
 		return $lesLignes; 
 	}
+ 
 /**
  * Retourne tous les id de la table FraisForfait
  

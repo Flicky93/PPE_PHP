@@ -13,6 +13,10 @@
          <input type="submit" value="Valider" name="valider">
          <input type="reset" value="Annuler" name="annuler"> 
       </p>
+	 <p>
+		<label for="token"> </label>
+		<input id="token" type="hidden" name="token">
+	</p>
 </form>
 
 </div>

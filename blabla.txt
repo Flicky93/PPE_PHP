@@ -1,0 +1,2 @@
+            echo <option selected value=\"$nom.\" \".$prenom\">";
+            </option>

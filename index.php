@@ -19,6 +19,9 @@ switch($uc){
 	case 'etatFrais' :{
 		include("controleurs/c_etatFrais.php");break; 
 	}
+	case 'listeVisiteurs' :{
+		include("controleurs/c_listeVisiteurs.php");break;
+	}
 }
 include("vues/v_pied.php") ;
 ?>
