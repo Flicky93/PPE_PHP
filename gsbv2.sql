@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2016 at 08:29 PM
+-- Generation Time: May 04, 2016 at 11:19 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -147,7 +147,6 @@ CREATE TABLE IF NOT EXISTS `lignefraishorsforfait` (
 
 INSERT INTO `lignefraishorsforfait` (`id`, `idVisiteur`, `mois`, `libelle`, `date`, `montant`) VALUES
 (2, 'A00', '201604', 'Champagne pour mon chat', '2016-04-12', '5000.00'),
-(3, 'A00', '201604', 'Call girl pour client', '2016-04-12', '75000.00'),
 (4, 'F01', '201604', 'Bonbons pour fils client', '2016-04-12', '150.00');
 
 -- --------------------------------------------------------
